@@ -9,20 +9,33 @@ app.use(express.json());
 
 
 //API
+
+//User Login
+const userPass = "basicuser"
+const userToken = "user"
+const userWelcome = "Welcome user, what do you think about these pandas?"
+
 //Admin Login
 const adminUser = "admin";
 const adminPass = "mysupersecretpasswordnoonewillguess";
-const token = "administrator"
-const flag = "UofUSecFlag{a_very_cool_panda}"
+const adminToken = "admin"
+const adminWelcome = "Welcome Admin ;) FLAG: UofUSecFlag{a_very_cool_panda}"
 
 //Simple Login
 router.post("/login", (req, res) => {
   try {
     const pass = req.body.password;
+    if(pass == userPass) {
+      const auth = Buffer.from(userToken).toString('base64');
+      return res.status(200).send({ Authenticated: true, Authorization: auth });
+    } else if (pass == adminPass) {
+      const auth = Buffer.from(adminToken).toString('base64');
+      return res.status(200).send({ Authenticated: true, Authorization: auth });
+    }
 
+    // Login as Admin
     if (adminPass == pass) {
-        const auth = Buffer.from(token).toString('base64');
-        return res.status(200).send({ Authenticated: true, Authorization: auth });
+
     } else {
       return res.status(403).send({ error: "Invalid Username or password" });
     }
@@ -51,15 +64,19 @@ router.get("/secretimage", (req, res) => {
 })
 
 //Super Secret Flag
-router.get("/flag", (req, res) => {
+router.get("/welcome", (req, res) => {
   //console.log(req.headers)
   try {
     if(req.headers.authorization == null)
       return res.status(403).send({ error: "Invalid authorization"}) 
+    
     const auth = req.headers.authorization
     const convertedAuth = new Buffer.from(auth, "base64").toString('ascii');
-    if(convertedAuth === token) {
-      return res.status(200).send({ flag: flag })
+
+    if(convertedAuth === adminToken) {
+      return res.status(200).send({ welcome: adminWelcome })
+    } else if(convertedAuth === userToken) {
+      return res.status(200).send({ welcome: userWelcome })
     } else {
       return res.status(403).send({ error: "Invalid authorization"})
     }

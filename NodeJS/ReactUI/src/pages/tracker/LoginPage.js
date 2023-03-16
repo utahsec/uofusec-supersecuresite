@@ -5,12 +5,12 @@ import { Image, Stack, Form, Button, InputGroup } from "react-bootstrap";
 import axios from "axios";
 
 //CSS
-import "./admin.css";
+import "./LoginPage.css";
 
-export default function Admin() {
+export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [feedback, setFeedBack] = useState("");
-  const [supersecret, setSuperSecret] = useState("");
+  const [welcomeText, setWelcomeText] = useState("");
   const [authstate, setAuthState] = useState({
     Authorization: "",
     Authenticated: false,
@@ -29,10 +29,10 @@ export default function Admin() {
 
   // Get flag on auth
   useEffect(() => {
-    axios.get("/flag", { headers: { authorization: authstate.Authorization }}).then((secretRes) => {
+    axios.get("/welcome", { headers: { authorization: authstate.Authorization }}).then((secretRes) => {
       console.log(secretRes)
       if(secretRes.status === 200) {
-        setSuperSecret(secretRes.data.flag);
+        setWelcomeText(secretRes.data.welcome);
       }
     })
   }, [authstate])
@@ -83,21 +83,9 @@ export default function Admin() {
         />
         {authstate.Authenticated ? (
           <>
-            <h3 className="Text-Header">My super super super secret image!</h3>
             <h4 className="Text-Header">
-              flag: {supersecret}
+              {welcomeText}
             </h4>
-            {/* <Image
-              style={{ maxWidth: 350 }}
-              rounded={true}
-              src={{
-                uri: `${baseurl}/api/secretimage`,
-                method: "GET",
-                headers: {
-                  Pragma: "no-cache",
-                },
-              }}
-            /> */}
           </>
         ) : (
           <div className="admin-stack">
@@ -120,7 +108,7 @@ export default function Admin() {
                 </Form.Control.Feedback>
               </InputGroup>
               <Button variant="primary" onClick={login}>
-                Primary
+                Login
               </Button>
             </Stack>
           </div>
