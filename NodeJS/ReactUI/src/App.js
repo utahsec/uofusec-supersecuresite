@@ -3,8 +3,11 @@ import NavBar from "./navigation/NavBar";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Home from "./pages/home/home";
 import Admin from "./pages/tracker/admin";
+import axios from "axios";
 
 function App() {
+
+  axios.defaults.baseURL = `${window.location.origin}/api`
   return (
     <div className="App">
       <Router>

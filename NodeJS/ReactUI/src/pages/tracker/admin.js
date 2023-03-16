@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, Stack, Form, Button } from "react-bootstrap";
+import { Image, Stack, Form, Button, InputGroup } from "react-bootstrap";
 
 //AXIOS
 import axios from "axios";
@@ -17,11 +17,18 @@ export default function Admin() {
         password: password,
       };
 
-      const response = await axios.post("", body);
+      const response = await axios.post("/login", body);
 
-      if (response.status == 200) {
+      if (response.status === 200) {
+        console.log("Success!")
+      } else {
+        setFeedBack(response.statusText);
+        console.log(response.statusText)
       }
-    } catch (ex) {}
+    } catch (ex) {
+      console.log(ex)
+      setFeedBack(ex.message)
+    }
   };
 
   const handleChange = (event) => {
@@ -45,7 +52,7 @@ export default function Admin() {
             Password
           </Form.Label>
           <Stack direction="horizontal" gap={4} className="root-stack">
-            <Stack direction="vertical" gap={2}>
+            <InputGroup hasValidation>
               <Form.Control
                 className="password-text-box"
                 type="password"
@@ -53,11 +60,12 @@ export default function Admin() {
                 aria-describedby="passwordHelpBlock"
                 value={password}
                 onChange={handleChange}
+                isInvalid={feedback !== ""}
               />
               <Form.Control.Feedback type="invalid">
-                Please choose a username.
+                {feedback}
               </Form.Control.Feedback>
-            </Stack>
+            </InputGroup>
             <Button variant="primary" onClick={login}>
               Primary
             </Button>
