@@ -12,7 +12,7 @@ export default function Home() {
           rounded={true}
           src={require("../../images/panda_wave.jpg")}
         />
-        <h3>Here are some more...</h3>
+        <h3 className="Text-Header">Here are some more...</h3>
         <Stack direction="horizontal" gap={3} className="root-stack">
           <Image
             style={{ maxWidth: 350 }}
