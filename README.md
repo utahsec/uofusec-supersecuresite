@@ -1,6 +1,12 @@
 # A Super simple vulnerable website about cool pandas
 
-## Setup
+## Docker Setup
+- Install Docker
+- Navigate to "NodeJS" folder
+- Run `docker compose up -d`
+- To shutdown run `docker compose down`
+
+## (OUTDATED) Setup
 
 - Make sure node is installed
 - Run "npm install" in the root folder
