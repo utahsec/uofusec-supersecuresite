@@ -18,24 +18,26 @@ export default function LoginPage() {
 
   //Check if we already have auth?
   useEffect(() => {
-    if(localStorage.getItem("Authenticated")) {
+    if (localStorage.getItem("Authenticated")) {
       const state = {
         Authenticated: true,
-        Authorization: localStorage.getItem("Authorization")
-      }
-      setAuthState(state)
+        Authorization: localStorage.getItem("Authorization"),
+      };
+      setAuthState(state);
     }
-  }, [])
+  }, []);
 
   // Get flag on auth
   useEffect(() => {
-    axios.get("/welcome", { headers: { authorization: authstate.Authorization }}).then((secretRes) => {
-      console.log(secretRes)
-      if(secretRes.status === 200) {
-        setWelcomeText(secretRes.data.welcome);
-      }
-    })
-  }, [authstate])
+    axios
+      .get("/welcome", { headers: { authorization: authstate.Authorization } })
+      .then((secretRes) => {
+        console.log(secretRes);
+        if (secretRes.status === 200) {
+          setWelcomeText(secretRes.data.welcome);
+        }
+      });
+  }, [authstate]);
 
   const login = async () => {
     try {
@@ -50,10 +52,10 @@ export default function LoginPage() {
         console.log(response.data);
         const state = {
           Authorization: response.data.Authorization,
-          Authenticated: response.data.Authenticated
-        }
+          Authenticated: response.data.Authenticated,
+        };
         localStorage.setItem("Authenticated", state.Authenticated);
-        localStorage.setItem("Authorization", state.Authorization)
+        localStorage.setItem("Authorization", state.Authorization);
         setAuthState(state);
       } else {
         setFeedBack(response.statusText);
@@ -74,7 +76,7 @@ export default function LoginPage() {
       <Stack direction="vertical" gap={4} className="root-stack">
         <h1 className="Text-Header">Admin Page</h1>
         <h3 className="Text-Header">
-          Admins Only! I keep my secret pandas here!
+          Admins Only! I keep my coolest pandas here!
         </h3>
         <Image
           style={{ maxWidth: 350 }}
@@ -83,9 +85,7 @@ export default function LoginPage() {
         />
         {authstate.Authenticated ? (
           <>
-            <h4 className="Text-Header">
-              {welcomeText}
-            </h4>
+            <h4 className="Text-Header">{welcomeText}</h4>
           </>
         ) : (
           <div className="admin-stack">
