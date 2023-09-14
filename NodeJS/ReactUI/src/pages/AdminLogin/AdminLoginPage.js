@@ -89,7 +89,7 @@ export default function AdminLoginPage() {
         <Image
           style={{ maxWidth: 350 }}
           rounded={true}
-          src={require("../../images/Oh-Stop.jpg")}
+          src={require("../../images/oh-he-working.jpg")}
         />
         {authstate.Authenticated ? (
           <>
