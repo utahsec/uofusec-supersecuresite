@@ -7,12 +7,12 @@ import AdminLoginPage from "./pages/AdminLogin/AdminLoginPage";
 import UserLoginPage from "./pages/UserLogin/UserLoginPage";
 
 function App() {
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === "prod") {
-    // prod
-    axios.defaults.baseURL = `${window.location.origin}/api`;
-  } else {
+  if (process.env.NODE_ENV === "dev") {
     // dev
     axios.defaults.baseURL = `http://localhost:3000/api`;
+  } else {
+    // prod
+    axios.defaults.baseURL = `${window.location.origin}/api`;
   }
 
   return (
