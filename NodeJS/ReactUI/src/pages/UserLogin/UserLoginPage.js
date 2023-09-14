@@ -90,6 +90,7 @@ export default function UserLoginPage() {
         {authstate.Authenticated ? (
           <>
             <h4 className="Text-Header">{welcomeText}</h4>
+            <h5 className="Text-Header">You are currently logged in as: {atob(authstate.Authorization)}</h5>
             <Button type="submit" variant="secondary" onClick={logout}>
               Logout
             </Button>

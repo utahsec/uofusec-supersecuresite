@@ -77,6 +77,8 @@ export default function AdminLoginPage() {
     window.location.reload();
   };
 
+  const userType = atob(authstate.Authorization);
+
   return (
     <div className="page">
       <Stack direction="vertical" gap={4} className="root-stack">
@@ -91,7 +93,18 @@ export default function AdminLoginPage() {
         />
         {authstate.Authenticated ? (
           <>
-            <h4 className="Text-Header">{welcomeText}</h4>
+            {userType === "admin" ? (
+              <>
+                <h4 className="Text-Header">{welcomeText}</h4>
+              </>
+            ) : (
+              <>
+                <h4 className="Text-Header">Whoa, your not an admin?? What are you doing here???</h4>
+              </>
+            )}
+            <h5 className="Text-Header">
+              You are currently logged in as: {userType}
+            </h5>
             <Button type="submit" variant="secondary" onClick={logout}>
               Logout
             </Button>
