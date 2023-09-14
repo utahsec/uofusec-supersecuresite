@@ -1,0 +1,17 @@
+.admin-stack {
+    width: 100;
+}
+
+.root-stack {
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.password-label {
+    color:white
+}
+
+.password-text-box {
+    color: #282c34
+}

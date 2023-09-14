@@ -21,7 +21,7 @@ const userWelcome = "Welcome user, what do you think about these pandas?";
 const adminUser = "admin";
 const adminPass = "mysupersecretpasswordnoonewillguess";
 const adminToken = "admin";
-const adminWelcome = "Welcome Admin ;) FLAG: UofUSecFlag{a_very_cool_panda}";
+const adminWelcome = "Welcome Admin ;) FLAG: UofUSec_Flag{a_very_cool_panda}";
 
 //Simple Login
 router.post("/login", (req, res) => {

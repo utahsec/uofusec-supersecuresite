@@ -5,9 +5,9 @@ import { Image, Stack, Form, Button, InputGroup } from "react-bootstrap";
 import axios from "axios";
 
 //CSS
-import "./LoginPage.css";
+import "./AdminLogin.css";
 
-export default function LoginPage() {
+export default function AdminLoginPage() {
   const [password, setPassword] = useState("");
   const [feedback, setFeedBack] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
@@ -71,6 +71,12 @@ export default function LoginPage() {
     setPassword(event.target.value);
   };
 
+  const logout = (event) => {
+    localStorage.clear("Authenticated");
+    localStorage.clear("Authorization");
+    window.location.reload();
+  };
+
   return (
     <div className="page">
       <Stack direction="vertical" gap={4} className="root-stack">
@@ -86,6 +92,9 @@ export default function LoginPage() {
         {authstate.Authenticated ? (
           <>
             <h4 className="Text-Header">{welcomeText}</h4>
+            <Button type="submit" variant="secondary" onClick={logout}>
+              Logout
+            </Button>
           </>
         ) : (
           <div className="admin-stack">

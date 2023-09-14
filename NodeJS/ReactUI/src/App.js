@@ -3,7 +3,8 @@ import NavBar from "./navigation/NavBar";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Home from "./pages/home/home";
 import axios from "axios";
-import LoginPage from "./pages/login/LoginPage";
+import AdminLoginPage from "./pages/AdminLogin/AdminLoginPage";
+import UserLoginPage from "./pages/UserLogin/UserLoginPage";
 
 function App() {
   if (!process.env.NODE_ENV || process.env.NODE_ENV === "prod") {
@@ -20,7 +21,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<LoginPage />} />
+          <Route exact path="/userlogin" element={<UserLoginPage />} />
+          <Route exact path="/adminlogin" element={<AdminLoginPage />} />
         </Routes>
       </Router>
     </div>
